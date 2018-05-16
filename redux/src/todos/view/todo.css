@@ -1,0 +1,12 @@
+.tag{
+    width:10px;
+    height: 10px;
+    display: inline-block;
+}
+
+.finished{
+    background-color: green;
+}
+.unfinished{
+    background-color: red;
+}
