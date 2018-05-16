@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import CountDown from './other/countDown';
+
 class App extends Component {
   render() {
     return (
@@ -10,9 +12,16 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <CountDown startCount={10}>
+          {
+            (count) => <p className="App-intro">
+              {
+                count > 0 ? count : "To get started, edit src/App.js and save to reload."
+              }
+            </p>
+          }
+        </CountDown>
+        
       </div>
     );
   }
