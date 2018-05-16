@@ -10,6 +10,7 @@ class App extends Component {
       <div className="App">
         <TodoList></TodoList>
         <Filter></Filter>
+        test
       </div>
     );
   }
