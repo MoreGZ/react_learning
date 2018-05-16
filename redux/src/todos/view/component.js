@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { createSelector} from 'reselect';
 
 import { toggleTodo, removeTodo } from '../actions';
 import TodoList from './todoList';
@@ -20,31 +21,57 @@ class Todos extends Component {
     }
 }
 
-const selectVisibleTodos = (todos, filter) => {
-    switch(filter){
-        case 'all' :{
-            return todos
-        }
-        case 'complete' :{
-            return todos.filter((item) => {
-                return item.complete
-            })
-        }
-        case 'uncomplete' :{
-            return todos.filter((item) => {
-                return !item.complete
-            })
-        }
-        default:{
-            return todos
-            // throw("unsupport error")
+const getFilter = (state) => state.filter;
+const getTodos = (state) =>  state.todos;
+
+const selectVisibleTodos = createSelector(
+    [getFilter, getTodos],
+    (filter, todos) => {
+        switch(filter){
+            case 'all' :{
+                return todos
+            }
+            case 'complete' :{
+                return todos.filter((item) => {
+                    return item.complete
+                })
+            }
+            case 'uncomplete' :{
+                return todos.filter((item) => {
+                    return !item.complete
+                })
+            }
+            default:{
+                return todos
+            }
         }
     }
-}
+)
+
+// const selectVisibleTodos = (todos, filter) => {
+//     switch(filter){
+//         case 'all' :{
+//             return todos
+//         }
+//         case 'complete' :{
+//             return todos.filter((item) => {
+//                 return item.complete
+//             })
+//         }
+//         case 'uncomplete' :{
+//             return todos.filter((item) => {
+//                 return !item.complete
+//             })
+//         }
+//         default:{
+//             return todos
+//         }
+//     }
+// }
 
 export default connect(
     (state) => ({
-        todos: selectVisibleTodos(state.todos, state.filter)
+        todos: selectVisibleTodos(state)
     }),
     (dispatch) => {
         return {

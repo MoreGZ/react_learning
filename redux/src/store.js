@@ -25,6 +25,8 @@ const storeEnhancers = compose(
     (win && win.devToolsExtension) ? win.devToolsExtension() : (f) => f
 )
 
+
+console.log(reducer);
 const store = createStore(reducer, {}, storeEnhancers);
 
 
