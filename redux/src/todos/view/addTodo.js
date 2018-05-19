@@ -50,11 +50,7 @@ class AddTodo extends Component {
 
 export default connect(
     null,
-    (dispatch) => {
-        return {
-            addTodo: function(text){
-                dispatch(addTodo(text))
-            }
-        }
+    {
+        addTodo
     }
 )(AddTodo);
